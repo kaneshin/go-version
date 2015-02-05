@@ -1,5 +1,10 @@
 # go-version
 
+## Installation
+
+```
+go get github.com/kaneshin/go-version
+```
 
 ## License:
 

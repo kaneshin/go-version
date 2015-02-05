@@ -1,24 +1,21 @@
-package main
+package version
 
 import (
 	"strconv"
 	"strings"
 )
 
-type Version string
-
-type VersionInterface interface {
-	String() string
-	Number() float64
-	MajorNumber() int
-	MinorNumber() int
-}
-
 const (
 	Ascending  = -1
 	Same       = 0
 	Descending = 1
 )
+
+type Version string
+
+func NewVersion(ver string) Version {
+	return (Version)(ver)
+}
 
 func (v Version) explode() []string {
 	return strings.Split(string(v), ".")
@@ -38,6 +35,7 @@ func (v Version) element(idx int) int {
 func (v Version) String() string {
 	return string(v)
 }
+
 func (v Version) Number() float64 {
 	dst := 0.0
 	fnd := 100.0
