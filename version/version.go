@@ -25,7 +25,7 @@ func (v Version) element(idx int) int {
 	if elms := v.explode(); len(elms) > idx {
 		num, err := strconv.Atoi(elms[idx])
 		if err != nil {
-			panic(err)
+			return 0
 		}
 		return num
 	}
