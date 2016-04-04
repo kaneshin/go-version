@@ -3,6 +3,8 @@ package version
 import (
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestVersion_1(t *testing.T) {
@@ -80,4 +82,15 @@ func TestVersion_1(t *testing.T) {
 		t.Fatalf("Expected true")
 	}
 
+}
+
+func TestVersion_2(t *testing.T) {
+	assert := assert.New(t)
+
+	version_1 := NewVersion("1.1.1")
+	version_10 := NewVersion("1.1.10")
+
+	assert.NotEqual(Same, version_1.Compare(version_10))
+	assert.False(version_1.IsGreaterThan(version_10))
+	assert.True(version_1.IsLessThan(version_10))
 }
