@@ -33,7 +33,7 @@ func TestVersion_1(t *testing.T) {
 		t.Fatalf("Expected %v, but %v:", expected4, version.String())
 	}
 
-	expected5 := 201.05
+	expected5 := 2000001.000005
 	if !reflect.DeepEqual(version.Number(), expected5) {
 		t.Fatalf("Expected %v, but %v:", expected5, version.Number())
 	}
@@ -87,10 +87,31 @@ func TestVersion_1(t *testing.T) {
 func TestVersion_2(t *testing.T) {
 	assert := assert.New(t)
 
-	version_1 := NewVersion("1.1.1")
-	version_10 := NewVersion("1.1.10")
+	version_1 := NewVersion("3.2.1")
+	version_10 := NewVersion("3.2.10")
+	version_100 := NewVersion("3.2.100")
+	version_1000 := NewVersion("3.2.1000")
+	version_x := NewVersion("3434.20941.141592")
+
+	assert.Equal(3000002.000001, version_1.Number())
+	assert.Equal(3000002.000010, version_10.Number())
+	assert.Equal(3000002.000100, version_100.Number())
+	assert.Equal(3000002.001000, version_1000.Number())
+	assert.Equal(3434020941.141592, version_x.Number())
 
 	assert.NotEqual(Same, version_1.Compare(version_10))
 	assert.False(version_1.IsGreaterThan(version_10))
 	assert.True(version_1.IsLessThan(version_10))
+
+	assert.NotEqual(Same, version_10.Compare(version_100))
+	assert.False(version_10.IsGreaterThan(version_100))
+	assert.True(version_10.IsLessThan(version_100))
+
+	assert.NotEqual(Same, version_100.Compare(version_1000))
+	assert.False(version_100.IsGreaterThan(version_1000))
+	assert.True(version_100.IsLessThan(version_1000))
+
+	assert.NotEqual(Same, version_1000.Compare(version_1))
+	assert.True(version_1000.IsGreaterThan(version_1))
+	assert.False(version_1000.IsLessThan(version_1))
 }

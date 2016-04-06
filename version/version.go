@@ -36,17 +36,18 @@ func (v Version) String() string {
 	return string(v)
 }
 
+const base = 1000000.0
+
 func (v Version) Number() float64 {
 	dst := 0.0
-	fnd := 100.0
-	mul := fnd
+	mul := base
 	for _, v := range v.explode() {
 		val, err := strconv.ParseFloat(v, 0)
 		if err != nil {
 			val = 0.0
 		}
 		dst += mul * val
-		mul /= fnd
+		mul /= base
 	}
 	return dst
 }
