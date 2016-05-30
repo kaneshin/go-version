@@ -60,6 +60,10 @@ func (v Version) MinorNumber() int {
 	return v.element(1)
 }
 
+func (v Version) RevisionNumber() int {
+	return v.element(2)
+}
+
 func (v Version) Compare(o Version) int {
 	vn := v.Number()
 	on := o.Number()

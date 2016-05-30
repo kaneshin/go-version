@@ -32,20 +32,21 @@ func TestVersion_1(t *testing.T) {
 	if !reflect.DeepEqual(version.String(), expected4) {
 		t.Fatalf("Expected %v, but %v:", expected4, version.String())
 	}
-
 	expected5 := 2000001.000005
 	if !reflect.DeepEqual(version.Number(), expected5) {
 		t.Fatalf("Expected %v, but %v:", expected5, version.Number())
 	}
-
 	expected6 := 2
 	if !reflect.DeepEqual(version.MajorNumber(), expected6) {
 		t.Fatalf("Expected %v, but %v:", expected6, version.MajorNumber())
 	}
-
 	expected7 := 1
 	if !reflect.DeepEqual(version.MinorNumber(), expected7) {
 		t.Fatalf("Expected %v, but %v:", expected7, version.MinorNumber())
+	}
+	expected8 := 5
+	if !reflect.DeepEqual(version.RevisionNumber(), expected8) {
+		t.Fatalf("Expected %v, but %v:", expected8, version.RevisionNumber())
 	}
 
 	var otherVersion Version
@@ -114,4 +115,47 @@ func TestVersion_2(t *testing.T) {
 	assert.NotEqual(Same, version_1000.Compare(version_1))
 	assert.True(version_1000.IsGreaterThan(version_1))
 	assert.False(version_1000.IsLessThan(version_1))
+}
+
+func TestVersion_3(t *testing.T) {
+	var version Version
+	version = NewVersion("3.5")
+
+	expected1 := NewVersion("3.5")
+	if !reflect.DeepEqual(version, expected1) {
+		t.Fatalf("Expected %v, but %v:", expected1, version)
+	}
+
+	expected2 := []string{"3", "5"}
+	if !reflect.DeepEqual(version.explode(), expected2) {
+		t.Fatalf("Expected %v, but %v:", expected2, version.explode())
+	}
+
+	expected3 := []int{3, 5}
+	for idx, val := range expected3 {
+		if !reflect.DeepEqual(version.element(idx), val) {
+			t.Fatalf("Expected %v, but %v:", val, version.element(idx))
+		}
+	}
+
+	expected4 := "3.5"
+	if !reflect.DeepEqual(version.String(), expected4) {
+		t.Fatalf("Expected %v, but %v:", expected4, version.String())
+	}
+	expected5 := 3000005.0
+	if !reflect.DeepEqual(version.Number(), expected5) {
+		t.Fatalf("Expected %v, but %v:", expected5, version.Number())
+	}
+	expected6 := 3
+	if !reflect.DeepEqual(version.MajorNumber(), expected6) {
+		t.Fatalf("Expected %v, but %v:", expected6, version.MajorNumber())
+	}
+	expected7 := 5
+	if !reflect.DeepEqual(version.MinorNumber(), expected7) {
+		t.Fatalf("Expected %v, but %v:", expected7, version.MinorNumber())
+	}
+	expected8 := 0
+	if !reflect.DeepEqual(version.RevisionNumber(), expected8) {
+		t.Fatalf("Expected %v, but %v:", expected8, version.MinorNumber())
+	}
 }
