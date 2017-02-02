@@ -159,3 +159,23 @@ func TestVersion_3(t *testing.T) {
 		t.Fatalf("Expected %v, but %v:", expected8, version.MinorNumber())
 	}
 }
+
+func TestGreaterEqual(t *testing.T) {
+	testVersion := NewVersion("2.1.5")
+	equalVersion := NewVersion("2.1.5")
+	greaterVersion := NewVersion("2.1.6")
+	lessVersion := NewVersion("2.1.4")
+	assert.Equal(t, true, testVersion.IsGreaterEqual(equalVersion))
+	assert.Equal(t, true, testVersion.IsGreaterEqual(lessVersion))
+	assert.Equal(t, false, testVersion.IsGreaterEqual(greaterVersion))
+}
+
+func TestLessEqual(t *testing.T) {
+	testVersion := NewVersion("2.1.5")
+	equalVersion := NewVersion("2.1.5")
+	greaterVersion := NewVersion("2.1.6")
+	lessVersion := NewVersion("2.1.4")
+	assert.Equal(t, true, testVersion.IsLessEqual(equalVersion))
+	assert.Equal(t, true, testVersion.IsLessEqual(greaterVersion))
+	assert.Equal(t, false, testVersion.IsLessEqual(lessVersion))
+}

@@ -82,3 +82,12 @@ func (v Version) IsGreaterThan(o Version) bool {
 func (v Version) IsLessThan(o Version) bool {
 	return v.Compare(o) == Ascending
 }
+
+func (v Version) IsGreaterEqual(o Version) bool {
+	res := v.Compare(o)
+	return res == Descending || res == Same
+}
+func (v Version) IsLessEqual(o Version) bool {
+	res := v.Compare(o)
+	return res == Ascending || res == Same
+}
