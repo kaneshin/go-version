@@ -160,22 +160,22 @@ func TestVersion_3(t *testing.T) {
 	}
 }
 
-func TestGreaterEqual(t *testing.T) {
+func TestIsGreaterThanOrEqualTo(t *testing.T) {
 	testVersion := NewVersion("2.1.5")
 	equalVersion := NewVersion("2.1.5")
 	greaterVersion := NewVersion("2.1.6")
 	lessVersion := NewVersion("2.1.4")
-	assert.Equal(t, true, testVersion.IsGreaterEqual(equalVersion))
-	assert.Equal(t, true, testVersion.IsGreaterEqual(lessVersion))
-	assert.Equal(t, false, testVersion.IsGreaterEqual(greaterVersion))
+	assert.Equal(t, true, testVersion.IsGreaterThanOrEqualTo(equalVersion))
+	assert.Equal(t, true, testVersion.IsGreaterThanOrEqualTo(lessVersion))
+	assert.Equal(t, false, testVersion.IsGreaterThanOrEqualTo(greaterVersion))
 }
 
-func TestLessEqual(t *testing.T) {
+func TestIsLessThanOrEqualTo(t *testing.T) {
 	testVersion := NewVersion("2.1.5")
 	equalVersion := NewVersion("2.1.5")
 	greaterVersion := NewVersion("2.1.6")
 	lessVersion := NewVersion("2.1.4")
-	assert.Equal(t, true, testVersion.IsLessEqual(equalVersion))
-	assert.Equal(t, true, testVersion.IsLessEqual(greaterVersion))
-	assert.Equal(t, false, testVersion.IsLessEqual(lessVersion))
+	assert.Equal(t, true, testVersion.IsLessThanOrEqualTo(equalVersion))
+	assert.Equal(t, true, testVersion.IsLessThanOrEqualTo(greaterVersion))
+	assert.Equal(t, false, testVersion.IsLessThanOrEqualTo(lessVersion))
 }
